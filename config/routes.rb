@@ -1,18 +1,23 @@
 Rails.application.routes.draw do
+  get 'menu/index'
+
   resources :profiles, only: [:edit,:update]
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
+  root 'pages#index'
+  
   get 'pages/index'
-
   get 'pages/about_us'
-
   get 'pages/faq'
-
   get 'pages/tos'
-
   get 'pages/contact_us'
   
-  root 'pages#index'
+  get 'menu/index'
+#  get 'menu/category/:id' => "menu#category", as: :menu_category
+  get 'menu/category/:id', controller: :menu, action: :category, as: :menu_category
+
+
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
